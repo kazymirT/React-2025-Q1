@@ -1,6 +1,9 @@
 import { type ChangeEvent, Component, type ReactNode } from 'react';
 import styles from './Header.module.scss';
-import { getLocalStorage, setLocalStorage } from '../utils/Storage';
+import {
+  getLocalStorage,
+  setLocalStorage,
+} from '../../components/utils/Storage';
 import { type HeaderProps, type HeaderState } from './types';
 
 export default class Header extends Component<HeaderProps, HeaderState> {
