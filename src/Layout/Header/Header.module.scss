@@ -1,0 +1,27 @@
+.header {
+  padding: 40px 0;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1280px;
+
+  .search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+
+    input {
+      width: 100%;
+      max-width: 300px;
+      padding: 10px 15px;
+      border-radius: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      border-radius: 10px;
+      background-color: yellow;
+    }
+  }
+}
