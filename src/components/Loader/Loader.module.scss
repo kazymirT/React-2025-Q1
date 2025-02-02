@@ -5,26 +5,27 @@
   background-color: rgba(42, 21, 128, 0.5);
   top: 0;
   left: 0;
+ 
   .loader {
     width: 82px;
     height: 18px;
-  position: relative;
-  top: 50%;
-  left: 50%;
-}
-.loader::before,
-.loader::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 10%);
-  top: 0;
-  background: #ff3d00;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  animation: jump 0.5s ease-in infinite alternate;
-}
+    position: relative;
+    top: 50%;
+    left: 50%;
+  }
+  .loader::before,
+  .loader::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 10%);
+    top: 0;
+    background: #ff3d00;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    animation: jump 0.5s ease-in infinite alternate;
+  }
 }
 
 .loader::after {

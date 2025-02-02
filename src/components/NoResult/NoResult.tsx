@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import styles from './NoResult.module.scss';
-import { NoResultProps } from './types';
+import { type NoResultProps } from './types';
 
 export default class NoResult extends React.Component<NoResultProps> {
   static defaultProps = {

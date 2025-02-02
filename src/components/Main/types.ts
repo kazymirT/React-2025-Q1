@@ -1,4 +1,4 @@
-import { Character } from 'rickmortyapi';
+import { type Character } from 'rickmortyapi';
 
 export type MainProps = {
   data: string | null;

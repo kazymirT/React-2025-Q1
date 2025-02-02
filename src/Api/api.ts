@@ -1,4 +1,4 @@
-import { Character, Info } from 'rickmortyapi';
+import { type Character, type Info } from 'rickmortyapi';
 
 export interface FetchCharactersResponse {
   results: Character[];
