@@ -1,7 +1,7 @@
 import { type Character } from 'rickmortyapi';
 
 export type MainProps = {
-  data: string | null;
+  searchName: string | null;
 };
 
 export type MainState = {

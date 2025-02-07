@@ -1,13 +1,12 @@
-import React, { ReactNode } from 'react';
+import { type FC } from 'react';
 import styles from './NoResult.module.scss';
 import { type NoResultProps } from './types';
+import { DEFAULT_ERROR_MESSAGE } from './constants';
 
-export default class NoResult extends React.Component<NoResultProps> {
-  static defaultProps = {
-    errorMessage: 'The search returned no results, please try again.',
-  };
+const NoResult: FC<NoResultProps> = ({
+  errorMessage = DEFAULT_ERROR_MESSAGE,
+}) => {
+  return <p className={styles['no-result']}>{errorMessage}</p>;
+};
 
-  render(): ReactNode {
-    return <p className={styles['no-result']}>{this.props.errorMessage}</p>;
-  }
-}
+export default NoResult;

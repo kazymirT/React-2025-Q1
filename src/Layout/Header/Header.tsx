@@ -1,51 +1,26 @@
-import { type ChangeEvent, Component, type ReactNode } from 'react';
+import { type FC, useRef } from 'react';
 import styles from './Header.module.scss';
-import {
-  getLocalStorage,
-  setLocalStorage,
-} from '../../components/utils/Storage';
-import { type HeaderProps, type HeaderState } from './types';
+import { type HeaderProps } from './types';
 
-export default class Header extends Component<HeaderProps, HeaderState> {
-  constructor(props: HeaderProps) {
-    super(props);
-    this.state = {
-      inputValue: '',
-    };
-  }
+const Header: FC<HeaderProps> = ({ onClick, searchValue }) => {
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  componentDidMount(): void {
-    const search: string = getLocalStorage('search');
-    if (search) {
-      this.props.onClick(search);
-      this.setState({ inputValue: search });
+  const handleSearch = () => {
+    if (inputRef.current) {
+      onClick(inputRef.current.value);
     }
-  }
-
-  handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value.trim();
-    this.setState({ inputValue: value });
-    setLocalStorage('search', value);
   };
 
-  handleSearch = () => {
-    this.props.onClick(this.state.inputValue);
-  };
+  return (
+    <header className={styles.header}>
+      <div className={styles.search}>
+        <input ref={inputRef} defaultValue={searchValue} type="text" />
+        <button onClick={handleSearch} type="button">
+          Search
+        </button>
+      </div>
+    </header>
+  );
+};
 
-  render(): ReactNode {
-    return (
-      <header className={styles.header}>
-        <div className={styles.search}>
-          <input
-            defaultValue={this.state.inputValue}
-            onChange={this.handleInputChange}
-            type="text"
-          />
-          <button onClick={this.handleSearch} type="button">
-            Search
-          </button>
-        </div>
-      </header>
-    );
-  }
-}
+export default Header;

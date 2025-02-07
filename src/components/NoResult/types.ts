@@ -1,3 +1,3 @@
 export type NoResultProps = {
-  errorMessage: string | null;
+  errorMessage?: string;
 };

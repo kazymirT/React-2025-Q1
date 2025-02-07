@@ -1,91 +1,56 @@
 import styles from './Main.module.scss';
-import { Component, type ReactNode } from 'react';
+import { type FC, useEffect, useState } from 'react';
+import { type Character } from 'rickmortyapi';
 
 import Loader from '../Loader/Loader';
 import Card from '../Card/Card';
 import NoResult from '../NoResult/NoResult';
 
-import { type MainProps, type MainState } from './types';
+import { type MainProps } from './types';
 import { fetchCharactersByName } from '../../Api/api';
 
-export default class Main extends Component<MainProps, MainState> {
-  constructor(props: MainProps) {
-    super(props);
-    this.state = {
-      status: 'idle',
-      data: null,
-      error: null,
-    };
-  }
+const Main: FC<MainProps> = ({ searchName }) => {
+  const [status, setStatus] = useState<
+    'idle' | 'loading' | 'success' | 'error'
+  >('idle');
+  const [data, setData] = useState<Character[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  useEffect(() => {
+    const loadData = async (search: string | null) => {
+      setStatus('loading');
 
-  componentDidUpdate(prevProps: MainProps) {
-    if (prevProps.data !== this.props.data) {
-      this.loadData(this.props.data);
-    }
-  }
+      try {
+        if (search || typeof search === 'string') {
+          const characterData = await fetchCharactersByName(search);
 
-  async loadData(search: string | null) {
-    this.setState({ status: 'loading' });
-
-    try {
-      if (search || typeof search === 'string') {
-        const characterData = await fetchCharactersByName(search);
-
-        if (characterData.results) {
-          this.setState({
-            status: 'success',
-            data: characterData.results,
-            error: null,
-          });
+          if (characterData.results) {
+            setData(characterData.results);
+            setStatus('success');
+          }
         }
+      } catch (error) {
+        setStatus('error');
+        setError(
+          error instanceof Error ? error.message : 'Unexpected error occurred'
+        );
       }
-    } catch (error) {
-      this.setState({
-        status: 'error',
-        data: null,
-        error:
-          error instanceof Error ? error.message : 'Unexpected error occurred',
-      });
-    }
-  }
+    };
+    loadData(searchName);
+  }, [searchName]);
+  return (
+    <main className={styles.main}>
+      <h2 className={styles.title}>Search results.</h2>
+      <div className={styles.list}>
+        {data && data.length > 0 ? (
+          data.map((item, index) => <Card key={index} data={item} />)
+        ) : (
+          <NoResult />
+        )}
+        {status === 'error' && error && <NoResult errorMessage={error} />}
+        {status === 'loading' && <Loader />}
+      </div>
+    </main>
+  );
+};
 
-  renderLoading(): ReactNode {
-    return <Loader />;
-  }
-
-  renderError(): ReactNode {
-    return <NoResult errorMessage={this.state.error} />;
-  }
-
-  renderResults(): ReactNode {
-    const { data } = this.state;
-
-    return (
-      <main className={styles.main}>
-        <h2 className={styles.title}>Search results.</h2>
-        <div className={styles.list}>
-          {data && data.length > 0 ? (
-            data.map((item, index) => <Card key={index} data={item} />)
-          ) : (
-            <NoResult />
-          )}
-        </div>
-      </main>
-    );
-  }
-
-  render(): ReactNode {
-    const { status } = this.state;
-
-    switch (status) {
-      case 'loading':
-        return this.renderLoading();
-      case 'error':
-        return this.renderError();
-      case 'success':
-        return this.renderResults();
-      default:
-        return null;
-    }
-  }
-}
+export default Main;
