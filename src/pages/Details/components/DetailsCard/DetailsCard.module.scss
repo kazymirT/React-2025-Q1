@@ -1,0 +1,36 @@
+.details-card {
+  position: sticky;
+  top: 50px;
+  border: 2px solid yellowgreen;
+  border-radius: 24px;
+  padding: 24px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  
+  .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    a {
+      align-self: flex-end;
+      text-decoration: none;
+      color: aqua;
+      font-size: 32px;
+    }
+  }
+  img {
+    border-radius: 50%;
+  }
+  ul {
+    border: 3px solid goldenrod;
+    padding: 12px;
+    border-radius: 24px;
+    li {
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
