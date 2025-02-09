@@ -1,11 +1,13 @@
 import { type FC } from 'react';
 import { CardProps } from './types';
 import styles from './Card.module.scss';
+import { NavLink, useSearchParams } from 'react-router-dom';
 
 const Card: FC<CardProps> = ({ data }) => {
-  const { image, name, status, gender, created } = data;
+  const { image, name, status, gender, created, id } = data;
+  const [searchParams] = useSearchParams();
   return (
-    <div className={styles.card}>
+    <NavLink to={`/details/${id}/?${searchParams}`} className={styles.card}>
       <img
         src={image || 'https://via.placeholder.com/300'}
         alt={name ? `Image of ${name}` : 'Character image'}
@@ -26,7 +28,7 @@ const Card: FC<CardProps> = ({ data }) => {
           </li>
         </ul>
       </div>
-    </div>
+    </NavLink>
   );
 };
 
