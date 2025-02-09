@@ -1,13 +1,13 @@
-import { Component, type ReactNode } from 'react';
-import Home from './pages/Home/Home';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+import { RouterProvider } from 'react-router-dom';
+import { route } from './providers/route';
 
-export default class App extends Component {
-  render(): ReactNode {
-    return (
-      <ErrorBoundary>
-        <Home />
-      </ErrorBoundary>
-    );
-  }
-}
+const App = () => {
+  return (
+    <ErrorBoundary>
+      <RouterProvider router={route} />
+    </ErrorBoundary>
+  );
+};
+
+export default App;

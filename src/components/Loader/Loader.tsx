@@ -1,12 +1,12 @@
-import React, { type ReactNode } from 'react';
+import { LOADER_TEST_ID } from './constants';
 import styles from './Loader.module.scss';
 
-export default class Loader extends React.Component {
-  render(): ReactNode {
-    return (
-      <div className={styles.wrapper}>
-        <span className={styles.loader} />
-      </div>
-    );
-  }
-}
+const Loader = () => {
+  return (
+    <div className={styles.wrapper} data-testid={LOADER_TEST_ID}>
+      <span className={styles.loader} />
+    </div>
+  );
+};
+
+export default Loader;

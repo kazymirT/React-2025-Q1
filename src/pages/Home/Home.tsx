@@ -1,29 +1,26 @@
-import { type HomeProps, type HomeState } from './types';
 import Header from '../../Layout/Header/Header';
 import styles from './Home.module.scss';
 import Footer from '../../Layout/Footer/Footer';
-import Main from '../../components/Main/Main';
-import React from 'react';
+import Main from '../../Layout/Main/Main';
+import { useSearchParams } from 'react-router-dom';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { useEffect } from 'react';
 
-export default class Home extends React.Component<HomeProps, HomeState> {
-  constructor(props: HomeProps) {
-    super(props);
-    this.state = {
-      searchValue: null,
-    };
-  }
+const Home = () => {
+  const [, setSearchParams] = useSearchParams();
+  const { searchValue } = useLocalStorage();
 
-  handleChangeSearch = (value: string) => {
-    this.setState({ searchValue: value });
-  };
+  useEffect(() => {
+    setSearchParams({ name: searchValue });
+  }, []);
 
-  render(): React.ReactNode {
-    return (
-      <div className={styles.home}>
-        <Header onClick={this.handleChangeSearch} />
-        <Main data={this.state.searchValue} />
-        <Footer />
-      </div>
-    );
-  }
-}
+  return (
+    <div className={styles.home}>
+      <Header />
+      <Main />
+      <Footer />
+    </div>
+  );
+};
+
+export default Home;

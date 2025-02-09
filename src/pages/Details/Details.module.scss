@@ -1,0 +1,28 @@
+.details {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-height: 50vh;
+  height: fit-content;
+  border: 2px solid goldenrod;
+  padding: 12px;
+  border-radius: 24px;
+  position: relative;
+
+  h2 {
+    text-align: center;
+  }
+  button {
+    align-self: center;
+    padding: 10px 15px;
+    border-radius: 12px;
+  }
+  .wrapper {
+    position: sticky;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+}

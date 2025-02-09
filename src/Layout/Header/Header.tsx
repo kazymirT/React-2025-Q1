@@ -1,51 +1,31 @@
-import { type ChangeEvent, Component, type ReactNode } from 'react';
+import { useRef } from 'react';
 import styles from './Header.module.scss';
-import {
-  getLocalStorage,
-  setLocalStorage,
-} from '../../components/utils/Storage';
-import { type HeaderProps, type HeaderState } from './types';
+import { useSearchParams } from 'react-router-dom';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
-export default class Header extends Component<HeaderProps, HeaderState> {
-  constructor(props: HeaderProps) {
-    super(props);
-    this.state = {
-      inputValue: '',
-    };
-  }
+const Header = () => {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { setLocalStorage } = useLocalStorage();
 
-  componentDidMount(): void {
-    const search: string = getLocalStorage('search');
-    if (search) {
-      this.props.onClick(search);
-      this.setState({ inputValue: search });
+  const handleSearch = () => {
+    if (inputRef.current) {
+      const searchName = inputRef.current.value;
+      setSearchParams({ name: searchName });
+      setLocalStorage('search', searchName);
     }
-  }
-
-  handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value.trim();
-    this.setState({ inputValue: value });
-    setLocalStorage('search', value);
   };
+  const defaultValue = searchParams.get('name') || '';
+  return (
+    <header className={styles.header}>
+      <div className={styles.search}>
+        <input ref={inputRef} defaultValue={defaultValue} type="text" />
+        <button onClick={handleSearch} type="button">
+          Search
+        </button>
+      </div>
+    </header>
+  );
+};
 
-  handleSearch = () => {
-    this.props.onClick(this.state.inputValue);
-  };
-
-  render(): ReactNode {
-    return (
-      <header className={styles.header}>
-        <div className={styles.search}>
-          <input
-            defaultValue={this.state.inputValue}
-            onChange={this.handleInputChange}
-            type="text"
-          />
-          <button onClick={this.handleSearch} type="button">
-            Search
-          </button>
-        </div>
-      </header>
-    );
-  }
-}
+export default Header;

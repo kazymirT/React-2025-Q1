@@ -1,24 +1,22 @@
 import styles from './BtnError.module.scss';
-import React from 'react';
-import { type ErrorBtnState } from './types';
+import { useState } from 'react';
 
-export default class ErrorBtn extends React.Component<object, ErrorBtnState> {
-  constructor(props: object) {
-    super(props);
-    this.state = { hasError: false };
-  }
-  handleClick = () => {
-    this.setState({ hasError: true });
+const ErrorBtn = () => {
+  const [state, setState] = useState({ hasError: false });
+
+  const handleClick = () => {
+    setState({ hasError: true });
   };
 
-  render(): React.ReactNode {
-    if (this.state.hasError) {
-      throw new Error('I crashed!');
-    }
-    return (
-      <button className={styles.btn} type="button" onClick={this.handleClick}>
-        Error
-      </button>
-    );
+  if (state.hasError) {
+    throw new Error('I crashed!');
   }
-}
+
+  return (
+    <button className={styles.btn} onClick={handleClick}>
+      Error
+    </button>
+  );
+};
+
+export default ErrorBtn;
