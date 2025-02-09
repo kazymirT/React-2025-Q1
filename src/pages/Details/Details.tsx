@@ -1,50 +1,30 @@
-import { Link, useLoaderData, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { Character } from 'rickmortyapi';
 import styles from './Details.module.scss';
+import Loader from '../../components/Loader/Loader';
+import { useFetch } from '../../hooks/useFetch';
+import DetailsCard from './components/DetailsCard/DetailsCard';
 
 const Details = () => {
-  const { data } = useLoaderData<{
-    id: string;
-    url: URL;
-    data: Character;
-  }>();
-  const { created, gender, name, status, type, species, image } = data;
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const { detailsId } = useParams<{ detailsId: string }>();
+  const { data, loading, error } = useFetch<Character>(
+    `https://rickandmortyapi.com/api/character/${detailsId}`
+  );
+  const handleClick = () => navigate(`/?${searchParams}`);
+
   return (
     <section className={styles.details}>
-      <div className={styles['details-card']}>
-        <div className={styles.title}>
-          <h3>{name}</h3>
-          <Link to={`/?${searchParams}`}>x</Link>
-        </div>
-        <img src={image} alt={name} width={350} height={350} />
-        <ul>
-          <li>
-            <p>Name:</p>
-            <p>{name}</p>
-          </li>
-          <li>
-            <p>Created:</p>
-            <p>{created}</p>
-          </li>
-          <li>
-            <p>Gender:</p>
-            <p>{gender}</p>
-          </li>
-          <li>
-            <p>Status:</p>
-            <p>{status}</p>
-          </li>
-          <li>
-            <p>Type:</p>
-            <p>{type}</p>
-          </li>
-          <li>
-            <p>Species:</p>
-            <p>{species}</p>
-          </li>
-        </ul>
+      <h2>Details Page</h2>
+      <button onClick={handleClick} type="button">
+        Cancel
+      </button>
+      <div className={styles.wrapper}>
+        {data && <DetailsCard data={data} />}
+        {error && <p>{error}</p>}
       </div>
+      {loading && <Loader />}
     </section>
   );
 };
