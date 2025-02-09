@@ -1,9 +1,8 @@
 import { FC } from 'react';
+import styles from './Pagination.module.scss';
 import { useSearchParams } from 'react-router-dom';
-export interface PaginationProps {
-  totalPages?: number;
-  currentPage?: number;
-}
+import { PaginationProps } from './types';
+
 export const Pagination: FC<PaginationProps> = ({ totalPages }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -18,7 +17,7 @@ export const Pagination: FC<PaginationProps> = ({ totalPages }) => {
   };
 
   return (
-    <div className="pagination">
+    <div className={styles.pagination}>
       <button
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
