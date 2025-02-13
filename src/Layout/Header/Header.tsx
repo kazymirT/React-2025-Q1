@@ -1,21 +1,22 @@
 import { useRef } from 'react';
 import styles from './Header.module.scss';
 import { useSearchParams } from 'react-router-dom';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { queryParams, setName } from '@/redux/slices/queryParamsSlice';
 
 const Header = () => {
+  const dispatch = useAppDispatch();
   const inputRef = useRef<HTMLInputElement>(null);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const { setLocalStorage } = useLocalStorage();
+  const { name: defaultValue } = useAppSelector(queryParams);
+  const [, setSearchParams] = useSearchParams();
 
   const handleSearch = () => {
     if (inputRef.current) {
       const searchName = inputRef.current.value;
       setSearchParams({ name: searchName });
-      setLocalStorage('search', searchName);
+      dispatch(setName(searchName));
     }
   };
-  const defaultValue = searchParams.get('name') || '';
   return (
     <header className={styles.header}>
       <div className={styles.search}>

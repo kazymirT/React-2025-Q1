@@ -1,12 +1,16 @@
-import { FC } from 'react';
-import styles from './Pagination.module.scss';
+import type { FC } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { PaginationProps } from './types';
+
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { queryParams, setPage } from '@/redux/slices/queryParamsSlice';
+
+import type { PaginationProps } from './types';
+import styles from './Pagination.module.scss';
 
 export const Pagination: FC<PaginationProps> = ({ totalPages }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const currentPage = Number(searchParams.get('page')) || 1;
+  const [, setSearchParams] = useSearchParams();
+  const dispatch = useAppDispatch();
+  const { page: currentPage } = useAppSelector(queryParams);
 
   const handlePageChange = (page: number) => {
     setSearchParams((prev) => {
@@ -14,6 +18,7 @@ export const Pagination: FC<PaginationProps> = ({ totalPages }) => {
       updatedParams.set('page', `${page}`);
       return updatedParams;
     });
+    dispatch(setPage(page));
   };
 
   return (

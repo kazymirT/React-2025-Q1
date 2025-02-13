@@ -1,6 +1,11 @@
 import { Character } from 'rickmortyapi';
 
-export interface FetchCharactersResponse {
+export interface AllCharactersFetchArgs {
+  name: string | null;
+  page: number | null;
+}
+
+export interface CharactersResponse {
   results: Character[];
   info?: {
     count: number;
