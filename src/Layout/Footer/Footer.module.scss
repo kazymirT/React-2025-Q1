@@ -2,4 +2,8 @@
   display: flex;
   justify-content: end;
   align-items: center;
+  position: sticky;
+  bottom: 0px;
+  background-color: gray;
+  border-radius: 12px 12px 0 0;
 }
