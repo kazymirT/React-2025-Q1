@@ -1,0 +1,23 @@
+.control {
+  width: 100%;
+  padding: 10px 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h2 {
+    font-size: 32px;
+  }
+
+  button, a {
+    padding: 5px 10px;
+    border-radius: 8px;
+    outline: none;
+    border: none;
+    display: block;
+    text-decoration: none;
+    background: purple;
+    color: aqua;
+    cursor: pointer;
+  }
+}
