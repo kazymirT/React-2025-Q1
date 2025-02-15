@@ -1,15 +1,33 @@
-import { type FC } from 'react';
-import { CardProps } from './types';
+import type { ChangeEvent, FC } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import {
+  selectedItem,
+  toggleItemSelection,
+} from '@/redux/slices/selectedItemsSlice';
+
+import type { CardProps } from './types';
 import styles from './Card.module.scss';
-import { NavLink, useSearchParams } from 'react-router-dom';
 import { CARD_TEST_ID } from './constants';
 
 const Card: FC<CardProps> = ({ data }) => {
-  const { image, name, status, gender, created, id } = data;
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [searchParams] = useSearchParams();
+  const { selectedItemsId } = useAppSelector(selectedItem);
+
+  const { image, name, status, gender, created, id } = data;
+  const isSelected = selectedItemsId.includes(id);
+
+  const handlerToggleSelected = (event: ChangeEvent<HTMLInputElement>) => {
+    event.stopPropagation();
+    dispatch(toggleItemSelection(data));
+  };
+  const handlerNavigate = () => navigate(`/details/${id}/?${searchParams}`);
   return (
-    <NavLink
-      to={`/details/${id}/?${searchParams}`}
+    <div
+      onClick={handlerNavigate}
       className={styles.card}
       data-testid={CARD_TEST_ID}
     >
@@ -28,7 +46,13 @@ const Card: FC<CardProps> = ({ data }) => {
           </li>
         </ul>
       </div>
-    </NavLink>
+      <input
+        type="checkbox"
+        checked={isSelected}
+        onClick={(e) => e.stopPropagation()}
+        onChange={handlerToggleSelected}
+      />
+    </div>
   );
 };
 
