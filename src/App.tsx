@@ -3,12 +3,15 @@ import { RouterProvider } from 'react-router-dom';
 import { route } from './providers/route';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import { ThemeProvider } from './providers/themeContext/themeContext';
 
 const App = () => {
   return (
     <ErrorBoundary>
       <Provider store={store}>
-        <RouterProvider router={route} />
+        <ThemeProvider>
+          <RouterProvider router={route} />
+        </ThemeProvider>
       </Provider>
     </ErrorBoundary>
   );

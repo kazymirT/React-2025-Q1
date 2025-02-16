@@ -3,6 +3,7 @@ import styles from './Header.module.scss';
 import { useSearchParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { queryParams, setName } from '@/redux/slices/queryParamsSlice';
+import ToggleTheme from './components/ToggleTheme/ToggleTheme';
 
 const Header = () => {
   const dispatch = useAppDispatch();
@@ -25,6 +26,7 @@ const Header = () => {
           Search
         </button>
       </div>
+      <ToggleTheme />
     </header>
   );
 };

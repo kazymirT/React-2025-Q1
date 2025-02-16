@@ -1,0 +1,46 @@
+.toggle-theme {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  cursor: pointer;
+}
+
+.toggle-theme button {
+  width: 70px;
+  background-color: gray;
+  border-radius: 20px;
+  border: none;
+  position: relative;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.toggle-theme .icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: rgb(50, 0, 106);
+  position: relative;
+  transition: all 0.5s ease;
+}
+
+.toggle-theme .icon::before {
+  font-weight: 400;
+  content: "\1F319";
+  position: absolute;
+  color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.5s ease;
+}
+
+body.dark .toggle-theme .icon {
+  transform: translateX(calc(100% + 10px));
+  background-color: yellow;
+}
+
+body.dark .toggle-theme .icon::before {
+  color: black;
+  content: "\2600";
+}
