@@ -1,8 +1,8 @@
 import { cleanup } from '@testing-library/react';
-import CardList from '../../../../../components/CardList/CardList';
 import { DEFAULT_ERROR_MESSAGE } from '@/pages/Home/modules/NoResult/constants';
 import { renderWithProviders } from '@/test/helper';
 import { MOCK_DATA } from './helper';
+import CardList from '../CardList';
 
 describe('CardList Component', async () => {
   afterEach(() => {

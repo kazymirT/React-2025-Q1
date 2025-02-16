@@ -1,8 +1,6 @@
-import { render } from '@testing-library/react';
 import { vi } from 'vitest';
 import { Pagination } from '../Pagination';
-import { MemoryRouter } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
+import { renderWithProviders } from '@/test/helper';
 
 const mockSetSearchParams = vi.fn();
 const mockGetSearchParams = vi.fn(() => new URLSearchParams({ page: '1' }));
@@ -16,14 +14,10 @@ vi.mock(import('react-router-dom'), async (importOriginal) => {
 });
 
 export const setup = (totalPages: number) => {
-  const utils = render(<Pagination totalPages={totalPages} />, {
-    wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>,
-  });
-  const user = userEvent.setup();
+  const utils = renderWithProviders(<Pagination totalPages={totalPages} />);
   return {
     ...utils,
     mockSetSearchParams,
     mockGetSearchParams,
-    user,
   };
 };

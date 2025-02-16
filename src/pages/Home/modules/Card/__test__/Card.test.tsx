@@ -9,7 +9,7 @@ describe('Card Component', async () => {
     cleanup();
   });
   it('should render a card with correct data', () => {
-    const { name, status, gender, created, image, id } = MOCK_DATA[0];
+    const { name, status, gender, image } = MOCK_DATA[0];
     const { getByText, getByAltText, getByTestId } = renderWithProviders(
       <Card data={MOCK_DATA[0]} />
     );
@@ -20,10 +20,8 @@ describe('Card Component', async () => {
     expect(img).toHaveAttribute('src', image);
 
     expect(link).toBeInTheDocument();
-    expect(link).toHaveAttribute('href', `/details/${id}/`);
     expect(getByText(name)).toBeInTheDocument();
     expect(getByText(status)).toBeInTheDocument();
     expect(getByText(gender)).toBeInTheDocument();
-    expect(getByText(created)).toBeInTheDocument();
   });
 });

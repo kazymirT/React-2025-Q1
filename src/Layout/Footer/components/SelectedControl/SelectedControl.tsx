@@ -4,6 +4,7 @@ import { clearSelection } from '@/redux/slices/selectedItemsSlice';
 import { useEffect, useState } from 'react';
 import { createCsv } from './createCsv';
 import { selectedItem } from '@/redux/slices/selectedItemsSlice';
+import { SELECTED_CONTROL } from './constants';
 
 const SelectedControl = () => {
   const [file, setFile] = useState('');
@@ -21,11 +22,11 @@ const SelectedControl = () => {
   return (
     <section className={styles.control}>
       <button onClick={handlerClearSelected} type="button">
-        Unselect all
+        {SELECTED_CONTROL.btnUnselect}
       </button>
-      <h2>{countSelectedItems} items are selected</h2>
+      <h2>{`${selectedItemsId} ${SELECTED_CONTROL.text}`}</h2>
       <a href={file} download={`${countSelectedItems}_characters`}>
-        Download
+        {SELECTED_CONTROL.btnDownload}
       </a>
     </section>
   );

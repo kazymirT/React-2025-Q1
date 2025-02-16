@@ -1,8 +1,6 @@
-import { render } from '@testing-library/react';
 import { vi } from 'vitest';
-import { MemoryRouter } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
 import Details from '../Details';
+import { renderWithProviders } from '@/test/helper';
 
 vi.mock('react-router-dom', async () => {
   const actual = await import('react-router-dom');
@@ -18,13 +16,8 @@ vi.mock('react-router-dom', async () => {
 });
 
 export const setup = () => {
-  const utils = render(<Details />, {
-    wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>,
-  });
-  const user = userEvent.setup();
+  const utils = renderWithProviders(<Details />);
   return {
     ...utils,
-
-    user,
   };
 };

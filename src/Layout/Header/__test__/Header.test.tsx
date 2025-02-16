@@ -2,30 +2,18 @@ import { renderWithProviders } from '@/test/helper';
 import Header from '../Header';
 
 describe('Header Component', () => {
-  it('should render Header with input and button', async () => {
-    const { getByRole } = renderWithProviders(<Header />);
-    const inputElement = getByRole('textbox');
-    const btn = getByRole('button', { name: 'Search' });
+  it('should render Header with logo and button', async () => {
+    const { getByText, getByRole } = renderWithProviders(<Header />);
 
-    expect(inputElement).toBeInTheDocument();
-    expect(inputElement).toHaveValue('');
-    expect(btn).toBeInTheDocument();
+    expect(getByText('Rick and Morty')).toBeInTheDocument();
+    expect(getByRole('button', { name: 'Light' })).toBeInTheDocument();
   });
-  it('should update localStorage when user types in input and clicks search button', async () => {
-    const inputValue = 'text for test';
-    const { getByRole, user } = renderWithProviders(<Header />);
-    const inputElement = getByRole('textbox');
-    const btn = getByRole('button', { name: 'Search' });
+  it('should render Header with logo and button', async () => {
+    const { getByRole, queryByRole, user } = renderWithProviders(<Header />);
 
-    expect(localStorage.getItem('search')).not.toBe(inputValue);
-    expect(inputElement).toBeInTheDocument();
-    expect(inputElement).toHaveValue('');
-    expect(btn).toBeInTheDocument();
+    expect(getByRole('button', { name: 'Light' })).toBeInTheDocument();
+    await user.click(getByRole('button', { name: 'Light' }));
 
-    await user.type(inputElement, inputValue);
-
-    await user.click(btn);
-
-    expect(localStorage.getItem('search')).toBe(inputValue);
+    expect(queryByRole('button', { name: 'Dark' })).toBeInTheDocument();
   });
 });
