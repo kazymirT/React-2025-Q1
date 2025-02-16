@@ -17,7 +17,7 @@ const Card: FC<CardProps> = ({ data }) => {
   const [searchParams] = useSearchParams();
   const { selectedItemsId } = useAppSelector(selectedItem);
 
-  const { image, name, status, gender, created, id } = data;
+  const { image, name, status, gender, id } = data;
   const isSelected = selectedItemsId.includes(id);
 
   const handlerToggleSelected = (event: ChangeEvent<HTMLInputElement>) => {
@@ -32,26 +32,26 @@ const Card: FC<CardProps> = ({ data }) => {
       data-testid={CARD_TEST_ID}
     >
       <img src={image} alt={`Image of ${name}`} width={300} height={300} />
-      <div className={styles.content}>
-        <h2>{name}</h2>
-        <ul>
-          <li>
-            <strong>Status:</strong> {status}
-          </li>
-          <li>
-            <strong>Gender:</strong> {gender}
-          </li>
-          <li>
-            <strong>Created:</strong> {created}
-          </li>
-        </ul>
+      <div className={styles.description}>
+        <div className={styles.text}>
+          <h3>{name}</h3>
+          <p>
+            <span>{status}</span>
+            <span>|</span>
+            <span>{gender}</span>
+          </p>
+        </div>
+        <p>#{id}</p>
       </div>
-      <input
-        type="checkbox"
-        checked={isSelected}
-        onClick={(e) => e.stopPropagation()}
-        onChange={handlerToggleSelected}
-      />
+      <div className={styles.favorite}>
+        <input
+          title="Add to my favorite"
+          type="checkbox"
+          checked={isSelected}
+          onClick={(e) => e.stopPropagation()}
+          onChange={handlerToggleSelected}
+        />
+      </div>
     </div>
   );
 };
