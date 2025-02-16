@@ -1,7 +1,7 @@
 import { cleanup } from '@testing-library/react';
 import { renderWithProviders } from '@/test/helper';
 import Card from '../Card';
-import { MOCK_DATA } from '@/components/CardList/__test__/helper';
+import { MOCK_DATA } from '@/pages/Home/modules/CardList/__test__/helper';
 import { CARD_TEST_ID } from '../constants';
 
 describe('Card Component', async () => {

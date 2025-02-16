@@ -1,31 +1,14 @@
-import { useRef } from 'react';
-import styles from './Header.module.scss';
-import { useSearchParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { queryParams, setName } from '@/redux/slices/queryParamsSlice';
 import ToggleTheme from './components/ToggleTheme/ToggleTheme';
+import styles from './Header.module.scss';
+import logo from '@/assets/logo.png';
 
 const Header = () => {
-  const dispatch = useAppDispatch();
-  const inputRef = useRef<HTMLInputElement>(null);
-  const { name: defaultValue } = useAppSelector(queryParams);
-  const [, setSearchParams] = useSearchParams();
-
-  const handleSearch = () => {
-    if (inputRef.current) {
-      const searchName = inputRef.current.value;
-      setSearchParams({ name: searchName });
-      dispatch(setName(searchName));
-    }
-  };
   return (
     <header className={styles.header}>
-      <div className={styles.search}>
-        <input ref={inputRef} defaultValue={defaultValue} type="text" />
-        <button onClick={handleSearch} type="button">
-          Search
-        </button>
-      </div>
+      <a href="/">
+        <img src={logo} width={150} height={150} alt="logo icon" />
+      </a>
+      <h2>Rick and Morty</h2>
       <ToggleTheme />
     </header>
   );

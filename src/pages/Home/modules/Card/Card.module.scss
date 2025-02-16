@@ -5,7 +5,6 @@
   overflow: hidden;
   border-radius: 12px;
   transition: all .3s ease-in-out;
-  color: #fafafa;
   
   img {
     width: 100%;
@@ -24,7 +23,7 @@
     width: 100%;
     justify-content: space-between;
     backdrop-filter: blur(5px);
-    background-color: rgba(0, 60, 128, 0.5);
+    background-color: var(--bac-color-card);
 
     .text {
       display: flex;
@@ -57,7 +56,8 @@
     align-items: center;
     padding: 5px;
     border-radius: 50%;
-    background-color: #fafafa;
+    background-color: var(--bac-color-secondary);
+
   input {
     position: relative;
     width: 30px;
@@ -80,7 +80,7 @@
       width: 25px;
       height: 25px;
       border-radius: 50%;
-      background-image: url('../../assets/false.svg');
+      background-image: url('../../../../assets/false.svg');
       background-repeat: no-repeat;
       background-size: cover;
     }    
@@ -89,7 +89,7 @@
       &::before {
 
         content: '';
-        background-image: url('../../assets/true.svg');
+          background-image: url('../../../../assets/true.svg');
       }
     }
   }

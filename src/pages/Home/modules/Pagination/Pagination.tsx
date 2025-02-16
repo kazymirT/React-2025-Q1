@@ -4,8 +4,8 @@ import { useSearchParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { queryParams, setPage } from '@/redux/slices/queryParamsSlice';
 
-import type { PaginationProps } from './types';
 import styles from './Pagination.module.scss';
+import { PaginationProps } from './types';
 
 export const Pagination: FC<PaginationProps> = ({ totalPages }) => {
   const [, setSearchParams] = useSearchParams();

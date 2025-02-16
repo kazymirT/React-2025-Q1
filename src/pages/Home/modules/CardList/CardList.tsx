@@ -2,8 +2,8 @@ import { type FC } from 'react';
 import { type CardListProps } from './types';
 import styles from './CardList.module.scss';
 import Card from '../Card/Card';
-import NoResult from '../NoResult/NoResult';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import NoResult from '../NoResult/NoResult';
 
 const CardList: FC<CardListProps> = ({ data }) => {
   const [searchParams] = useSearchParams();

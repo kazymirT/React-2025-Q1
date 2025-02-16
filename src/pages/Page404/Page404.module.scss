@@ -1,8 +1,17 @@
 .wrapper {
+  padding: 25px;
   display: flex;
   flex-direction: column;
-  gap: 25px;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  gap: 25px;
+  background-color: var(--bac-color-primary);
+  color: var(--color-primary);
+
+  button {
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: var(--bac-color-card-h);
+    color: var(--color-primary);
+  }
 }

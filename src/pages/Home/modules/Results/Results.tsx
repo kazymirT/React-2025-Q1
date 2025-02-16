@@ -1,11 +1,11 @@
 import styles from './Results.module.scss';
-import CardList from '../../components/CardList/CardList';
-import { Pagination } from '../../components/Pagination/Pagination';
-import Loader from '../../components/Loader/Loader';
-import NoResult from '../../components/NoResult/NoResult';
 import { useGetAllCharactersQuery } from '@/redux/services/character';
 import { useAppSelector } from '@/redux/hooks';
 import { queryParams } from '@/redux/slices/queryParamsSlice';
+import Loader from '@/components/Loader/Loader';
+import NoResult from '@/pages/Home/modules/NoResult/NoResult';
+import { Pagination } from '../Pagination/Pagination';
+import CardList from '../CardList/CardList';
 
 const Results = () => {
   const { page, name } = useAppSelector(queryParams);

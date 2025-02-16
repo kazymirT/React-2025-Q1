@@ -1,17 +1,13 @@
-import React from 'react';
-
 import styles from './ToggleTheme.module.scss';
 import { useTheme } from '@/providers/themeContext/useTheme';
 
-const ToggleTheme: React.FC = () => {
+const ToggleTheme = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className={styles['toggle-theme']} onClick={toggleTheme}>
-      <button>
-        <div className={`icon ${theme === 'dark' ? 'dark' : 'light'}`}></div>
-      </button>
-    </div>
+    <button onClick={toggleTheme} className={styles['toggle-theme']}>
+      {theme === 'dark' ? 'Light' : 'Dark'}
+    </button>
   );
 };
 

@@ -3,8 +3,6 @@
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -16,4 +14,33 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+body {
+  background-color: #fafafa;
+  --color-primary: #000;
+  --color-secondary: #fafafa;
+  --bac-color-primary: #fff;
+  --bac-color-button: #000;
+  --bac-color-card: rgba(170, 7, 185, 0.5);
+  --bac-color-secondary: rgba(0, 60, 128);
+  --bac-color-secondary-h: rgba(0, 60, 128);
+  --bac-color-card-h: rgba(0, 60, 128, 0.5);
+  }
+
+body:has(.dark) {
+  background-color: #000;
+  --color-primary: #fff;
+  --color-secondary: #fafafa;
+  --bac-color-primary: #000; 
+  --bac-color-secondary: #fafafa;
+  --bac-color-secondary-h: rgba(170, 7, 185);
+  --bac-color-button: #000;
+  --bac-color-card: rgba(0, 60, 128, 0.5);
+  --bac-color-card-h: rgba(170, 7, 185, 0.5);
+}
+
+button {
+  outline: none;
+  border: none;
 }

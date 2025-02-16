@@ -1,6 +1,6 @@
 import { cleanup } from '@testing-library/react';
-import CardList from '../CardList';
-import { DEFAULT_ERROR_MESSAGE } from '@/components/NoResult/constants';
+import CardList from '../../../../../components/CardList/CardList';
+import { DEFAULT_ERROR_MESSAGE } from '@/pages/Home/modules/NoResult/constants';
 import { renderWithProviders } from '@/test/helper';
 import { MOCK_DATA } from './helper';
 

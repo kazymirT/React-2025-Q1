@@ -1,17 +1,16 @@
-import Header from '@/Layout/Header/Header';
-import Main from '@/Layout/Main/Main';
-import Footer from '@/Layout/Footer/Footer';
-
 import styles from './Home.module.scss';
-import { useTheme } from '@/providers/themeContext/useTheme';
+import { Outlet } from 'react-router-dom';
+import Search from './modules/Search/Search';
+import Results from './modules/Results/Results';
 
 const Home = () => {
-  const { theme } = useTheme();
   return (
-    <div className={`${styles.home} ${styles[`home__${theme}`]}`}>
-      <Header />
-      <Main />
-      <Footer />
+    <div className={styles.wrapper}>
+      <main className={styles.main}>
+        <Search />
+        <Results />
+      </main>
+      <Outlet />
     </div>
   );
 };
