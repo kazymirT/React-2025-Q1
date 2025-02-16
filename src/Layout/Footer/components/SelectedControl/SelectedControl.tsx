@@ -24,7 +24,7 @@ const SelectedControl = () => {
       <button onClick={handlerClearSelected} type="button">
         {SELECTED_CONTROL.btnUnselect}
       </button>
-      <h2>{`${selectedItemsId} ${SELECTED_CONTROL.text}`}</h2>
+      <h2>{`${countSelectedItems} ${SELECTED_CONTROL.text}`}</h2>
       <a href={file} download={`${countSelectedItems}_characters`}>
         {SELECTED_CONTROL.btnDownload}
       </a>
