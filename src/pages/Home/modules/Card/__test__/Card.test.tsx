@@ -24,4 +24,28 @@ describe('Card Component', async () => {
     expect(getByText(status)).toBeInTheDocument();
     expect(getByText(gender)).toBeInTheDocument();
   });
+  it('should toggle checkbox state and update store correctly', async () => {
+    const { id } = MOCK_DATA[0];
+    const { getByRole, store, user } = renderWithProviders(
+      <Card data={MOCK_DATA[0]} />,
+      {
+        preloadedState: {
+          selectedItems: { selectedItemsId: [], selectedItems: [] },
+        },
+      }
+    );
+    const checkbox = getByRole('checkbox');
+    expect(checkbox).toBeInTheDocument();
+    expect(checkbox).not.toBeChecked();
+
+    await user.click(checkbox);
+
+    expect(checkbox).toBeChecked();
+    expect(store.getState().selectedItems.selectedItemsId).toHaveLength(1);
+    expect(store.getState().selectedItems.selectedItemsId[0]).toBe(id);
+
+    await user.click(checkbox);
+    expect(checkbox).not.toBeChecked();
+    expect(store.getState().selectedItems.selectedItemsId).toHaveLength(0);
+  });
 });
