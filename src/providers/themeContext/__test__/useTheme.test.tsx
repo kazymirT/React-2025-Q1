@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import { useTheme } from './useTheme';
+import { useTheme } from '../useTheme';
 
 describe('useTheme', () => {
   it('should throw an error when used outside of ThemeProvider', () => {
