@@ -51,4 +51,24 @@ describe('Footer', () => {
 
     expect(btnUnselect).toBeInTheDocument();
   });
+  it('should render footer with items', async () => {
+    const { queryByRole, user, store } = renderWithProviders(<Footer />, {
+      preloadedState: {
+        selectedItems: {
+          selectedItemsId: [1, 2, 3],
+          selectedItems: MOCK_CHARACTERS,
+        },
+      },
+    });
+
+    const btnUnselect = queryByRole('button', {
+      name: SELECTED_CONTROL.btnUnselect,
+    }) as HTMLElement;
+
+    expect(btnUnselect).toBeInTheDocument();
+
+    await user.click(btnUnselect);
+
+    expect(store.getState().selectedItems.selectedItemsId).toHaveLength(0);
+  });
 });
