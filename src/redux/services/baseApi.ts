@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const baseURLApi = 'https://rickandmortyapi.com/api/';
+const baseURLApi = import.meta.env.VITE_API_BASE_URL;
 
 const baseQuery = fetchBaseQuery({
   baseUrl: baseURLApi,
