@@ -33,4 +33,15 @@ describe('Pagination', () => {
     const nextButton = getByText('>');
     expect(nextButton).toBeDisabled();
   });
+  it('should update search params correctly when changing pages', async () => {
+    const totalPages = 5;
+    const { user, getByText, mockSetSearchParams, mockSearchParams } =
+      setup(totalPages);
+
+    const nextButton = getByText('>');
+    await user.click(nextButton);
+
+    expect(mockSetSearchParams).toHaveBeenCalledTimes(2);
+    expect(mockSearchParams.get('page')).toBe('2');
+  });
 });
