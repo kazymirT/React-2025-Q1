@@ -1,6 +1,6 @@
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
-import { RouterProvider } from 'react-router-dom';
-import { route } from './providers/route';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { AppRoutes } from './providers/route';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import { ThemeProvider } from './providers/themeContext/themeContext';
@@ -10,7 +10,9 @@ const App = () => {
     <ErrorBoundary>
       <Provider store={store}>
         <ThemeProvider>
-          <RouterProvider router={route} />
+          <Router>
+            <AppRoutes />
+          </Router>
         </ThemeProvider>
       </Provider>
     </ErrorBoundary>

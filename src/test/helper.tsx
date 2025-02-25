@@ -34,12 +34,13 @@ export function renderWithProviders(
     preloadedState = {},
     store = setupStore(preloadedState),
     ...renderOptions
-  }: ExtendedRenderOptions = {}
+  }: ExtendedRenderOptions = {},
+  routerInit = '/'
 ) {
   function Wrapper({ children }: PropsWithChildren<object>): JSX.Element {
     return (
       <Provider store={store}>
-        <MemoryRouter initialEntries={['/']}>
+        <MemoryRouter initialEntries={[routerInit]}>
           <ThemeProvider>{children}</ThemeProvider>
         </MemoryRouter>
       </Provider>
