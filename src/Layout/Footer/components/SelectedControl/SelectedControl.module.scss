@@ -1,0 +1,25 @@
+.control {
+  width: 100%;
+  padding: 10px 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h2 {
+    font-size: 32px;
+  }
+
+  button, a {
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 18px;
+    outline: none;
+    border: none;
+    display: block;
+    text-decoration: none;
+    background: var(--bac-color-card);
+    color: var(--color-primary);
+    cursor: pointer;
+  }
+}

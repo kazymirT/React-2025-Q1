@@ -1,29 +1,16 @@
-import { useRef } from 'react';
+import { Link } from 'react-router-dom';
+import ToggleTheme from './components/ToggleTheme/ToggleTheme';
 import styles from './Header.module.scss';
-import { useSearchParams } from 'react-router-dom';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
+import logo from '@/assets/logo.png';
 
 const Header = () => {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const { setLocalStorage } = useLocalStorage();
-
-  const handleSearch = () => {
-    if (inputRef.current) {
-      const searchName = inputRef.current.value;
-      setSearchParams({ name: searchName });
-      setLocalStorage('search', searchName);
-    }
-  };
-  const defaultValue = searchParams.get('name') || '';
   return (
     <header className={styles.header}>
-      <div className={styles.search}>
-        <input ref={inputRef} defaultValue={defaultValue} type="text" />
-        <button onClick={handleSearch} type="button">
-          Search
-        </button>
-      </div>
+      <Link to="/">
+        <img src={logo} width={150} height={150} alt="logo icon" />
+      </Link>
+      <h2>Rick and Morty</h2>
+      <ToggleTheme />
     </header>
   );
 };

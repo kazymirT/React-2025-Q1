@@ -5,7 +5,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: aqua;
+  background-color: var(--bac-color-primary);
+  color: var(--color-primary);
 
   div {
     display: flex;
@@ -16,5 +17,7 @@
   button {
     padding: 10px 5px;
     cursor: pointer;
+    background-color: var(--bac-color-card-h);
+    color: var(--color-primary);
   }
 }

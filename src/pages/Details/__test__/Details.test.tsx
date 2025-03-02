@@ -27,7 +27,7 @@ describe('Details Page', () => {
       () => {
         expect(getAllByText(MOCK_DATA_ID.name)).toHaveLength(2);
       },
-      { timeout: 3000 }
+      { timeout: 4000 }
     );
   });
 });

@@ -5,4 +5,16 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: var(--bac-color-primary);
+  
+  p {
+    color: var(--color-primary);
+  }
+  
+  button {
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: var(--bac-color-card-h);
+    color: var(--color-primary);
+  }
 }

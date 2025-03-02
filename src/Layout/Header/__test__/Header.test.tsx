@@ -1,31 +1,40 @@
 import { renderWithProviders } from '@/test/helper';
 import Header from '../Header';
+import { cleanup } from '@testing-library/react';
 
 describe('Header Component', () => {
-  it('should render Header with input and button', async () => {
-    const { getByRole } = renderWithProviders(<Header />);
-    const inputElement = getByRole('textbox');
-    const btn = getByRole('button', { name: 'Search' });
-
-    expect(inputElement).toBeInTheDocument();
-    expect(inputElement).toHaveValue('');
-    expect(btn).toBeInTheDocument();
+  afterEach(() => {
+    cleanup();
   });
-  it('should update localStorage when user types in input and clicks search button', async () => {
-    const inputValue = 'text for test';
-    const { getByRole, user } = renderWithProviders(<Header />);
-    const inputElement = getByRole('textbox');
-    const btn = getByRole('button', { name: 'Search' });
+  beforeEach(() => {
+    localStorage.clear();
+  });
+  it('should render Header with logo and button', async () => {
+    const { getByText, getByRole } = renderWithProviders(<Header />);
 
-    expect(localStorage.getItem('search')).not.toBe(inputValue);
-    expect(inputElement).toBeInTheDocument();
-    expect(inputElement).toHaveValue('');
-    expect(btn).toBeInTheDocument();
+    expect(getByText('Rick and Morty')).toBeInTheDocument();
+    expect(getByRole('button', { name: 'Light' })).toBeInTheDocument();
+  });
+  it('should render button for change theme', async () => {
+    const { getByRole, queryByRole, user } = renderWithProviders(<Header />);
 
-    await user.type(inputElement, inputValue);
+    expect(getByRole('button', { name: 'Light' })).toBeInTheDocument();
+    await user.click(getByRole('button', { name: 'Light' }));
 
-    await user.click(btn);
+    expect(queryByRole('button', { name: 'Dark' })).toBeInTheDocument();
+    expect(localStorage.getItem('theme')).toBe('light');
 
-    expect(localStorage.getItem('search')).toBe(inputValue);
+    await user.click(getByRole('button', { name: 'Dark' }));
+
+    expect(queryByRole('button', { name: 'Light' })).toBeInTheDocument();
+    expect(localStorage.getItem('theme')).toBe('dark');
+  });
+
+  it('should load theme from localStorage', async () => {
+    localStorage.setItem('theme', 'light');
+
+    const { getByRole } = renderWithProviders(<Header />);
+
+    expect(getByRole('button', { name: 'Dark' })).toBeInTheDocument();
   });
 });

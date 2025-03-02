@@ -1,24 +1,16 @@
-import Header from '../../Layout/Header/Header';
 import styles from './Home.module.scss';
-import Footer from '../../Layout/Footer/Footer';
-import Main from '../../Layout/Main/Main';
-import { useSearchParams } from 'react-router-dom';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
-import { useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
+import Search from './modules/Search/Search';
+import Results from './modules/Results/Results';
 
 const Home = () => {
-  const [, setSearchParams] = useSearchParams();
-  const { searchValue } = useLocalStorage();
-
-  useEffect(() => {
-    setSearchParams({ name: searchValue });
-  }, []);
-
   return (
-    <div className={styles.home}>
-      <Header />
-      <Main />
-      <Footer />
+    <div className={styles.wrapper}>
+      <main className={styles.main}>
+        <Search />
+        <Results />
+      </main>
+      <Outlet />
     </div>
   );
 };
